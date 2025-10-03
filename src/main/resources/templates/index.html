@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Address Books</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .address-book { border: 1px solid #ccc; padding: 15px; margin: 10px 0; }
+        .buddy-list { margin-left: 20px; }
+        .buddy-item { color: #555; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<h1>My Address Books</h1>
+<div th:if="${#lists.isEmpty(addressBooks)}">
+    <p>No address books found.</p>
+</div>
+
+<div th:each="addressBook : ${addressBooks}" class="address-book">
+    <h2>
+        Address Book #<span th:text="${addressBook.id}"></span>
+        <a th:href="@{/addressbooks/{id}/view(id=${addressBook.id})}"
+           style="margin-left: 15px; font-size: 14px;">View Buddies</a>
+    </h2>
+
+    <div th:if="${#lists.isEmpty(addressBook.buddies)}">
+        <p>No buddies in this address book.</p>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(addressBook.buddies)}" class="buddy-list">
+        <p><strong>Buddies (</strong><span th:text="${addressBook.buddies.size()}"></span><strong>):</strong></p>
+        <ul>
+            <li th:each="buddy : ${addressBook.buddies}" class="buddy-item">
+                <span th:text="${buddy.name}">Name</span> -
+                <span th:text="${buddy.phone}">Phone</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
