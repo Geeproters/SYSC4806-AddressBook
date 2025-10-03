@@ -32,8 +32,8 @@ public class AddressBookController {
     // Get a specific address book by ID
     @GetMapping("/addressbooks/{id}")
     public ResponseEntity<AddressBook> getAddressBook(@PathVariable Long id) {
-        Optional<AddressBook> addressBook = addressBookRepository.findById(id);
-        return addressBook.map(ResponseEntity::ok)
+        return addressBookRepository.findById(id)
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -44,30 +44,22 @@ public class AddressBookController {
             @RequestBody Map<String, String> buddyData) {
 
         Optional<AddressBook> addressBookOpt = addressBookRepository.findById(addressBookId);
-        if (addressBookOpt.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+        if (addressBookOpt.isEmpty()) return ResponseEntity.notFound().build();
 
         String name = buddyData.get("name");
         String phone = buddyData.get("phone");
-
-        if (name == null || phone == null) {
-            return ResponseEntity.badRequest().build();
-        }
+        if (name == null || phone == null) return ResponseEntity.badRequest().build();
 
         AddressBook addressBook = addressBookOpt.get();
-
-        // Create buddy using default constructor and setters
         BuddyInfo newBuddy = new BuddyInfo();
         newBuddy.setName(name);
         newBuddy.setPhone(phone);
 
-        // Save the buddy first to ensure it's managed by JPA
+        // Save buddy and associate with address book
         BuddyInfo savedBuddy = buddyInfoRepository.save(newBuddy);
         addressBook.addBuddy(savedBuddy);
 
-        AddressBook savedBook = addressBookRepository.save(addressBook);
-        return ResponseEntity.ok(savedBook);
+        return ResponseEntity.ok(addressBookRepository.save(addressBook));
     }
 
     // Get all buddies from an address book
@@ -89,26 +81,19 @@ public class AddressBookController {
         Optional<AddressBook> addressBookOpt = addressBookRepository.findById(addressBookId);
         Optional<BuddyInfo> buddyOpt = buddyInfoRepository.findById(buddyId);
 
-        if (addressBookOpt.isEmpty() || buddyOpt.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
+        if (addressBookOpt.isEmpty() || buddyOpt.isEmpty()) return ResponseEntity.notFound().build();
 
         AddressBook addressBook = addressBookOpt.get();
-        BuddyInfo buddy = buddyOpt.get();
+        addressBook.getBuddies().remove(buddyOpt.get());
 
-        addressBook.getBuddies().remove(buddy);
-        AddressBook savedBook = addressBookRepository.save(addressBook);
-
-        return ResponseEntity.ok(savedBook);
+        return ResponseEntity.ok(addressBookRepository.save(addressBook));
     }
 
     // Delete an address book
     @DeleteMapping("/addressbooks/{id}")
     public ResponseEntity<Void> deleteAddressBook(@PathVariable Long id) {
-        if (addressBookRepository.existsById(id)) {
-            addressBookRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
+        if (!addressBookRepository.existsById(id)) return ResponseEntity.notFound().build();
+        addressBookRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

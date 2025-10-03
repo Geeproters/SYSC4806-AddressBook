@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
-@Controller  // Note: @Controller instead of @RestController for Thymeleaf views
+@Controller
 public class AddressBookViewController {
 
     @Autowired
     private AddressBookRepository addressBookRepository;
 
-    // Display all address books
+    // Display all address books on the home page
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("addressBooks", addressBookRepository.findAll());
-        return "index";  // Returns index.html template
+        return "index";  // index.html template
     }
 
     // Display a specific address book and its buddies
@@ -29,10 +29,9 @@ public class AddressBookViewController {
         if (addressBook.isPresent()) {
             model.addAttribute("addressBook", addressBook.get());
             model.addAttribute("buddies", addressBook.get().getBuddies());
-            return "addressbook-view";  // Returns addressbook-view.html template
+            return "addressbook-view";  // addressbook-view.html template
         } else {
-            // If address book not found, redirect to home
-            return "redirect:/";
+            return "redirect:/";  // Redirect if not found
         }
     }
 }
