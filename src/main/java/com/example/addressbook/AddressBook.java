@@ -9,11 +9,8 @@ public class AddressBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id; // Primary key
+    private Long id;
 
-    // One-to-many relationship with BuddyInfo
-    // Cascade PERSIST ensures saving the AddressBook also saves its buddies
-    // orphanRemoval = true automatically deletes buddies removed from the list
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<BuddyInfo> buddies = new ArrayList<>();
 
