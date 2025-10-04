@@ -1,32 +1,31 @@
 package com.example.addressbook;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BuddyInfoTest {
+class BuddyInfoTest {
 
     private BuddyInfo buddy;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         buddy = new BuddyInfo("Peter", "101219562");
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         assertEquals("Peter (101219562)", buddy.toString());
     }
 
-    //Trivial getter tests:
     @Test
-    public void testGetName() {
+    void testGetName() {
         assertEquals("Peter", buddy.getName());
     }
 
     @Test
-    public void testGetPhone() {
+    void testGetPhone() {
         assertEquals("101219562", buddy.getPhone());
     }
 }

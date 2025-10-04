@@ -1,36 +1,35 @@
 package com.example.addressbook;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AddressBookTest {
+class AddressBookTest {
 
     private AddressBook book;
     private BuddyInfo peter;
     private BuddyInfo greg;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         book = new AddressBook();
         peter = new BuddyInfo("Peter", "101-219-562");
         greg = new BuddyInfo("Greg", "123-456-7890");
     }
 
     @Test
-    public void testAddBuddy() {
+    void testAddBuddy() {
         book.addBuddy(peter);
         List<BuddyInfo> buddies = book.getBuddies();
         assertEquals(1, buddies.size());
         assertEquals(peter, buddies.get(0));
     }
 
-
     @Test
-    public void testToString() {
+    void testToString() {
         book.addBuddy(peter);
         book.addBuddy(greg);
 
