@@ -36,7 +36,9 @@
             <li th:each="buddy : ${addressBook.buddies}" class="buddy-item">
                 <span th:text="${buddy.name}">Name</span> -
                 <span th:text="${buddy.phone}">Phone</span>
+                <span th:if="${buddy.address != null}"> - <span th:text="${buddy.address}"></span></span>
             </li>
+
         </ul>
     </div>
 </div>

@@ -50,10 +50,15 @@ public class AddressBookController {
         String phone = buddyData.get("phone");
         if (name == null || phone == null) return ResponseEntity.badRequest().build();
 
+        String address = buddyData.get("address"); // optional field
+
         AddressBook addressBook = addressBookOpt.get();
         BuddyInfo newBuddy = new BuddyInfo();
         newBuddy.setName(name);
         newBuddy.setPhone(phone);
+        if (address != null) {
+            newBuddy.setAddress(address);
+        }
 
         // Save buddy and associate with address book
         BuddyInfo savedBuddy = buddyInfoRepository.save(newBuddy);
@@ -61,6 +66,7 @@ public class AddressBookController {
 
         return ResponseEntity.ok(addressBookRepository.save(addressBook));
     }
+
 
     // Get all buddies from an address book
     @GetMapping("/addressbooks/{addressBookId}/buddies")

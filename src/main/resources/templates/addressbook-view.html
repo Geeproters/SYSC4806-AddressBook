@@ -19,13 +19,11 @@
     <p>No buddies in this address book.</p>
 </div>
 
-<div th:unless="${#lists.isEmpty(buddies)}" class="buddy-list">
-    <h2>Buddies (<span th:text="${buddies.size()}"></span>):</h2>
-    <div th:each="buddy : ${buddies}" class="buddy-item">
-        <strong th:text="${buddy.name}">Name</strong><br>
-        Phone: <span th:text="${buddy.phone}">Phone</span><br>
-        Buddy ID: <code th:text="${buddy.id}">ID</code>
-    </div>
+<div th:each="buddy : ${buddies}" class="buddy-item">
+    <strong th:text="${buddy.name}">Name</strong><br>
+    Phone: <span th:text="${buddy.phone}">Phone</span><br>
+    <span th:if="${buddy.address != null}">Address: <span th:text="${buddy.address}"></span><br></span>
+    Buddy ID: <code th:text="${buddy.id}">ID</code>
 </div>
 </body>
 </html>

@@ -24,6 +24,8 @@ public class AddressBookApplication {
 
             // Create buddies
             BuddyInfo buddy1 = new BuddyInfo("Peter", "101-219-562");
+            buddy1.setAddress("123 Main Street");
+
             BuddyInfo buddy2 = new BuddyInfo("Greg", "123-456-7890");
 
             // Add to address book
