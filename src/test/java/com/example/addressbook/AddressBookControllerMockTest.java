@@ -14,8 +14,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(AddressBookController.class)
-class AddressBookControllerMockTest {
+@WebMvcTest(ApiController.class)
+class ApiControllerMockTest {
 
     @Autowired
     private MockMvc mockMvc;

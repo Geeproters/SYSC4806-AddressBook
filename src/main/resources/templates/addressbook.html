@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Address Book Details</title>
+</head>
+<body>
+<a href="/">← Back to All Address Books</a>
+<h1>Address Book #<span th:text="${addressBook.id}"></span></h1>
+
+<h3>Add Buddy</h3>
+<form th:action="@{/addressbooks/{id}/buddies(id=${addressBook.id})}" method="post" th:object="${newBuddy}">
+    <label>Name: <input type="text" th:field="*{name}" required></label><br>
+    <label>Phone: <input type="text" th:field="*{phone}" required></label><br>
+    <label>Address: <input type="text" th:field="*{address}"></label><br>
+    <button type="submit">Add Buddy</button>
+</form>
+
+<h3>Buddies</h3>
+<div th:if="${#lists.isEmpty(buddies)}">
+    <p>No buddies in this address book.</p>
+</div>
+
+<ul th:each="buddy : ${buddies}">
+    <li>
+        <b th:text="${buddy.name}"></b> (<span th:text="${buddy.phone}"></span>)
+        <span th:if="${buddy.address != null}">
+      - <span th:text="${buddy.address}"></span>
+    </span>
+    </li>
+</ul>
+</body>
+</html>

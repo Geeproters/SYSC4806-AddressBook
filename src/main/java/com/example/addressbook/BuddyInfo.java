@@ -14,7 +14,7 @@ public class BuddyInfo {
 
     private String name;
     private String phone;
-    private String address; // new field
+    private String address;
 
     public BuddyInfo() {}
 

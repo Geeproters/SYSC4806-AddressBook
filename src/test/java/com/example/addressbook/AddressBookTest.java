@@ -16,8 +16,8 @@ class AddressBookTest {
     @BeforeEach
     void setUp() {
         book = new AddressBook();
-        peter = new BuddyInfo("Peter", "101-219-562");
-        greg = new BuddyInfo("Greg", "123-456-7890");
+        peter = new BuddyInfo("Peter", "101-219-562", "456 cres");
+        greg = new BuddyInfo("Greg", "123-456-7890", "123 str");
     }
 
     @Test
@@ -33,7 +33,7 @@ class AddressBookTest {
         book.addBuddy(peter);
         book.addBuddy(greg);
 
-        String expected = "[Peter (101-219-562), Greg (123-456-7890)]";
+        String expected = "[Peter (101-219-562) [456 cres], Greg (123-456-7890) [123 str]]";
         assertEquals(expected, book.toString());
     }
 }
