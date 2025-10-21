@@ -1,6 +1,7 @@
 package com.example.addressbook;
 
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,8 @@ public class AddressBook {
     @JoinColumn(name = "address_book_id") // avoids a join table, fixes duplicates
     private List<BuddyInfo> buddies = new ArrayList<>();
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     public void addBuddy(BuddyInfo buddy) {
         buddies.add(buddy);

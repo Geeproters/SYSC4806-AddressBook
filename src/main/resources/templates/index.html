@@ -1,3 +1,4 @@
+<!-- Single Address Book -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -21,6 +22,9 @@
         <a th:href="@{/addressbooks/{id}(id=${ab.id})}">
             Address Book #<span th:text="${ab.id}"></span>
         </a>
+        <form th:action="@{/addressbooks/{id}/delete(id=${ab.id})}" method="post" style="display:inline">
+            <button type="submit">Delete</button>
+        </form>
     </li>
 </ul>
 </body>

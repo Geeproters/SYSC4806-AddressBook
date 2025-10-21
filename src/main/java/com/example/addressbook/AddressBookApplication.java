@@ -23,7 +23,7 @@ public class AddressBookApplication {
             log.info("--- Saving a new AddressBook with Buddies ---");
 
             // Create buddies
-            BuddyInfo buddy1 = new BuddyInfo("Peter", "101-219-562" , "456 crescent");
+            BuddyInfo buddy1 = new BuddyInfo("Peter", "101-219-562", "456 crescent");
 
             BuddyInfo buddy2 = new BuddyInfo("Greg", "123-456-7890", "123 street");
 

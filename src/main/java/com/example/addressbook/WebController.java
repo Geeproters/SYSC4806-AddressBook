@@ -52,4 +52,24 @@ public class WebController { // new controller on the server-side to handle clie
         addressBookRepository.save(ab); // cascade persists BuddyInfo
         return "redirect:/addressbooks/" + id;
     }
+
+    // Delete a buddy
+    @PostMapping("/addressbooks/{abId}/buddies/{buddyId}/delete")
+    public String deleteBuddy(@PathVariable Long abId, @PathVariable Long buddyId) {
+        AddressBook ab = addressBookRepository.findById(abId).orElse(null);
+        if (ab != null) {
+            ab.getBuddies().removeIf(b -> b.getId().equals(buddyId));
+            addressBookRepository.save(ab);
+        }
+        return "redirect:/addressbooks/" + abId;
+    }
+
+    // Delete an address book
+    @PostMapping("/addressbooks/{id}/delete")
+    public String deleteAddressBook(@PathVariable Long id) {
+        if (addressBookRepository.existsById(id)) {
+            addressBookRepository.deleteById(id);
+        }
+        return "redirect:/";
+    }
 }

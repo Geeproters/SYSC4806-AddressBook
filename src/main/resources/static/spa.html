@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Book SPA</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="addressbook.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Address Books (SPA)</h1>
+
+<button id="new-addressbook">Create New Address Book</button>
+<div id="addressbooks"></div>
+
+<template id="addressbook-template">
+    <div class="addressbook">
+        <h2>Address Book #<span class="ab-id"></span></h2>
+        <button class="delete-ab">Delete Address Book</button>
+
+        <ul class="buddy-list"></ul>
+
+        <input type="text" class="buddy-name" placeholder="Name">
+        <input type="text" class="buddy-phone" placeholder="Phone">
+        <input type="text" class="buddy-address" placeholder="Address">
+        <button class="add-buddy">Add Buddy</button>
+    </div>
+</template>
+
+</body>
+</html>
